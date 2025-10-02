@@ -7,8 +7,8 @@
     "registry": "https://npm.pkg.github.com/@OtabekSadiridinov"
   },
   "scripts": {
-    "bundle-dev": "browserify --standalone MahalliyBaza index.js -t babelify -t [ envify --NODE_ENV development ] > dist/mahalliybaza.dev.js",
-    "bundle-prod": "browserify -p [ tinyify --no-flat ] --standalone MahalliyBaza index.js -t babelify -t [ envify --NODE_ENV production ] > dist/mahalliybaza.min.js",
+    "bundle-dev": "browserify --standalone Localbase index.js -t babelify -t [ envify --NODE_ENV development ] > dist/localbase.dev.js",
+    "bundle-prod": "browserify -p [ tinyify --no-flat ] --standalone Localbase index.js -t babelify -t [ envify --NODE_ENV production ] > dist/localbase.min.js",
     "bundle": "npm run bundle-dev && npm run bundle-prod",
     "deploy": "npm run bundle && npm publish"
   },
@@ -29,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OtabekSadiridinov/mahalliybaza.git"
+    "url": "git+https://github.com/otabekoff/mahalliybaza.git"
   },
   "keywords": [
     "database",
@@ -40,7 +40,7 @@
     "javascript"
   ],
   "bugs": {
-    "url": "https://github.com/OtabekSadiridinov/mahalliybaza/issues"
+    "url": "https://github.com/otabekoff/mahalliybaza/issues"
   },
-  "homepage": "https://github.com/OtabekSadiridinov/mahalliybaza#readme"
+  "homepage": "https://github.com/otabekoff/mahalliybaza#readme"
 }
