@@ -1,35 +1,65 @@
 {
-  "name": "mahalliybaza",
-  "version": "0.0.1",
+  "name": "ombor",
+  "type": "module",
+  "version": "0.0.2",
   "description": "Firebasega uslubidagi, offalyn, mahalliy ma'lumotlar bazasi.",
-  "main": "index.js",
+  "main": "dist/ombor.umd.js",
+  "module": "dist/ombor.es.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/@OtabekSadiridinov"
   },
   "scripts": {
-    "bundle-dev": "browserify --standalone Localbase index.js -t babelify -t [ envify --NODE_ENV development ] > dist/localbase.dev.js",
-    "bundle-prod": "browserify -p [ tinyify --no-flat ] --standalone Localbase index.js -t babelify -t [ envify --NODE_ENV production ] > dist/localbase.min.js",
-    "bundle": "npm run bundle-dev && npm run bundle-prod",
-    "deploy": "npm run bundle && npm publish"
+    "bundle": "npm run build",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --ext .ts,.js",
+    "lint:fix": "eslint src --ext .ts,.js --fix",
+    "format": "prettier --write \"src/**/*.{ts,js,json}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,js,json}\"",
+    "type-check": "tsc --noEmit",
+    "deploy": "npm run build && npm publish",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "prepare": "husky",
+    "testing": "echo \"Error: no test specified\" && exit 1",
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major",
+    "changelog": "standard-version --dry-run --release-as patch"
   },
   "author": "Otabek Sadiridinov",
   "license": "MIT",
   "dependencies": {
-    "browserify": "^17.0.0",
-    "localforage": "^1.7.4",
-    "ordered-uuid": "^1.1.0"
+    "localforage": "^1.10.0",
+    "ordered-uuid": "^1.1.0",
+    "vitepress": "^1.6.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.6",
-    "@babel/preset-env": "^7.11.5",
-    "babel-plugin-add-module-exports": "^1.0.2",
-    "babelify": "^10.0.0",
-    "envify": "^4.1.0",
-    "tinyify": "^3.0.0"
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
+    "@typescript-eslint/parser": "^8.45.0",
+    "@vitest/coverage-v8": "^3.2.4",
+    "@vitest/ui": "^3.2.4",
+    "eslint": "^9.36.0",
+    "husky": "^9.1.7",
+    "jsdom": "^27.0.0",
+    "lint-staged": "^16.2.3",
+    "prettier": "^3.6.2",
+    "standard-version": "^9.5.0",
+    "typedoc": "^0.28.13",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.8",
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^3.2.4"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/otabekoff/mahalliybaza.git"
+    "url": "git+https://github.com/otabekoff/ombor.git"
   },
   "keywords": [
     "database",
@@ -40,7 +70,7 @@
     "javascript"
   ],
   "bugs": {
-    "url": "https://github.com/otabekoff/mahalliybaza/issues"
+    "url": "https://github.com/otabekoff/ombor/issues"
   },
-  "homepage": "https://github.com/otabekoff/mahalliybaza#readme"
+  "homepage": "https://github.com/otabekoff/ombor#readme"
 }

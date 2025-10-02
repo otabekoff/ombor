@@ -1,0 +1,17 @@
+{
+    // "files.exclude": {
+    //   "**/.browserlistrc": true,
+    //   "**/.editorconfig": true,
+    //   "**/.gitignore": true,
+    //   "**/.node-version": true,
+    //   "**/.prettierignore": true,
+    //   "**/.prettierrc": true,
+    //   "**/eslint.config.js": true,
+    //   "**/package-lock.json": true
+    // },
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+      "package.json": ".browserslistrc,.editorconfig,.gitignore,.node-version,.prettierignore,.prettierrc,eslint.config.js,package-lock.json",
+      "readme.md": "changelog.md,license.*,contributing.md,code_of_conduct.md, roadmap.md,authors.md",
+    }
+}

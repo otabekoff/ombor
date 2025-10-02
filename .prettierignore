@@ -1,0 +1,9 @@
+# Ignore build outputs
+dist/
+*.log
+
+# Ignore test files
+coverage/
+
+# Ignore specific file types
+*.js.map

@@ -1,0 +1,21 @@
+{
+  "types": [
+    { "type": "feat", "section": "Features" },
+    { "type": "feature", "section": "Features" },
+    { "type": "fix", "section": "Bug Fixes" },
+    { "type": "chore", "section": "Chores", "hidden": false },
+    { "type": "docs", "section": "Documentation", "hidden": false },
+    { "type": "style", "section": "Styles", "hidden": true },
+    { "type": "refactor", "section": "Code Refactoring", "hidden": false },
+    { "type": "perf", "section": "Performance Improvements" },
+    { "type": "test", "section": "Tests", "hidden": true },
+    { "type": "build", "section": "Build System", "hidden": false },
+    { "type": "ci", "section": "Continuous Integration", "hidden": true }
+  ],
+  "releaseCommitMessageFormat": "chore(release): {{currentTag}} [skip ci]",
+  "header": "# Changelog\n\nBarcha muhim o'zgarishlar shu yerda qayd etiladi.\n\nAll notable changes to this project will be documented in this file.\n\n",
+  "commitUrlFormat": "https://github.com/otabekoff/ombor/commit/{{hash}}",
+  "compareUrlFormat": "https://github.com/otabekoff/ombor/compare/{{previousTag}}...{{currentTag}}",
+  "issueUrlFormat": "https://github.com/otabekoff/ombor/issues/{{id}}",
+  "userUrlFormat": "https://github.com/{{user}}"
+}

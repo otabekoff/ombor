@@ -1,0 +1,4 @@
+# Temporarily skip tests until we have comprehensive test suite
+# npm test
+npm run lint
+npm run type-check

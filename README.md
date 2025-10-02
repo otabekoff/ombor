@@ -1,8 +1,8 @@
-# MahalliyBaza <!-- omit in toc -->
+# Ombor <!-- omit in toc -->
 
 Firebasega uslubidagi, offalyn, mahalliy ma'lumotlar bazasi.
 
-MahalliyBaza sizga Firebase uslubidagi sodda, kuchli, foydalanuvchi brauzerida saqlanadigan,IndexedDB ma'lumotlar bazasida ishlashni osonlashtiradigan offlayn ma'lumotlar bazasini taqdim etadi.
+Ombor sizga Firebase uslubidagi sodda, kuchli, foydalanuvchi brauzerida saqlanadigan,IndexedDB ma'lumotlar bazasida ishlashni osonlashtiradigan offlayn ma'lumotlar bazasini taqdim etadi.
 
 Siz xohlagancha ma'lumot bazalarini yaratishingiz mumkin.
 
@@ -11,7 +11,7 @@ Ma'lumot bazalari Collectionlar(to'plam) va Documentlar(hujjatlar)ga birlashtiri
 - **Ma'lumotlar bazalarida collectionlar** mavjud (misol: `foydalanuvchilar`)
 - **Collectionlarda documentlar** mavjud (misol: `{ id: 1, ism: 'Otabek', yosh: 19 }`
 
-MahalliyBaza [LocalForage](https://github.com/localForage/localForage) yordamida tuzilgan.
+Ombor [LocalForage](https://github.com/localForage/localForage) yordamida tuzilgan.
 
 
 ## Boshlashdan avval bilib qo'yishingiz yaxshi bo'lgan atamalar.
@@ -96,35 +96,35 @@ MahalliyBaza [LocalForage](https://github.com/localForage/localForage) yordamida
 Ishlab chiqish (development) varianti. Ushbu variant siz proyekt ustida ishlayotgan paytingizda tekshirish uchun ancha qulayliklar yaratib beradi. Misol ucun: yangi qo'shilagan, o'zgartirilgan, o'chirilgan va hkz ma'lumotlar to'grisida sizga browseringiz dev-tools(F12 yoki CTRL+SHIFT+I) oynasining console bo'limida rang bilan ajratilgan habarlar yozish imkonini beradi.
 
 ```html
-<script src="https://unpkg.com/mahalliybaza/dist/mahalliybaza.dev.js"></script>
+<script src="https://unpkg.com/Ombor/dist/Ombor.dev.js"></script>
 
 <script>
-  let db = new MahalliyBaza('db')
+  let db = new Ombor('db')
 </script>
 
 # Yoki
 
-<script src="./mahalliybaza.dev.js"></script>
+<script src="./Ombor.dev.js"></script>
 
 <script>
-  let db = new MahalliyBaza('db')
+  let db = new Ombor('db')
 </script>
 ```
 
 Yoki, hajmi kichiklashtirilgan, ishlab chiqarish (production) variantidan foydlaning. Bu variantni siz proyektni tamomlaganingizdan keyin foydalanuvchilarga taqdim etganingizda ishlatishingiz mumkin. Bunda, qo'shilgan, yangilangan, o'chirilgan va hkz ma'lumotlar haqida browser dev-tools console bo'limida habarlar ko'rsatilmaydi. Va ishlab chiqish variantiga qaraganda fayl hajmi kamroq bo'ladi.
 ```html
-<script src="https://unpkg.com/mahalliybaza/dist/mahalliybaza.min.js"></script>
+<script src="https://unpkg.com/Ombor/dist/Ombor.min.js"></script>
 
 <script>
-  let db = new MahalliyBaza('db')
+  let db = new Ombor('db')
 </script>
 
 # Yoki
 
-<script src="./mahalliybaza.min.js"></script>
+<script src="./Ombor.min.js"></script>
 
 <script>
-  let db = new MahalliyBaza('db')
+  let db = new Ombor('db')
 </script>
 ```
 
@@ -133,25 +133,25 @@ Yoki, hajmi kichiklashtirilgan, ishlab chiqarish (production) variantidan foydla
 #### NPM bilan
 
 ```
-npm install mahalliybaza --save
+npm install Ombor --save
 ```
 
 ```javascript
-import MahalliyBaza from 'mahalliybaza'
+import Ombor from 'Ombor'
 
-let db = new MahalliyBaza('db')
+let db = new Ombor('db')
 ```
 
 #### NuxtJS bilan
 ```
-npm install mahalliybaza
+npm install Ombor
 ```
 
 ```javascript
-// plugins/mahalliybaza.js
+// plugins/Ombor.js
 
-import MahalliyBaza from 'mahalliybaza'
-let db = new MahalliyBaza('db')
+import Ombor from 'Ombor'
+let db = new Ombor('db')
 export default (context,inject) => {
   inject('db', db)
 }
@@ -163,7 +163,7 @@ export default (context,inject) => {
 export default {
   ...
   plugins: [
-    { src: "~/plugins/MahalliyBaza", mode: "client" }
+    { src: "~/plugins/Ombor", mode: "client" }
   ],
   ...
 }
@@ -191,10 +191,10 @@ export default {
 ## Video Darslik
 
 Tez kunda... Videodarslik tayyorlanmoqda.
-<!-- <a href="https://www.youtube.com/watch?" target="_blank">Mening MahalliyBazani ishlatish haqidagi videoimni ko'ring</a>, 0 dan boshlab to'lliq tushuntirilgan: -->
+<!-- <a href="https://www.youtube.com/watch?" target="_blank">Mening Omborni ishlatish haqidagi videoimni ko'ring</a>, 0 dan boshlab to'lliq tushuntirilgan: -->
 
 <!-- <a href="https://www.youtube.com/watch?v=" target="_blank">
-  <img src="images/va-nihoyat-mahalliybaza.png">
+  <img src="images/va-nihoyat-Ombor.png">
 </a> -->
 
 ## Qisqa Kirish
@@ -408,7 +408,7 @@ Sizning documentlaringiz **IndexedDB storeda** `key` bilan saqlanadi:
 
 ![IndexedDB Store - Keys](images/indexed-db-keys.png)
 
-Odatda, MahalliyBaza bu keylar uchun tasodifiy, tartiblangan, yagona IDlarni yaratadi.
+Odatda, Ombor bu keylar uchun tasodifiy, tartiblangan, yagona IDlarni yaratadi.
 
 Ammo siz ushbu keylarning (kalitlarning) nomini boshqarishni(o'zgartirishni) xohlashingiz mumkin. Masalan siz:
 - Document qo'shganda o'z keyingizni ko'rsatishingiz.
@@ -431,7 +431,7 @@ Ammo siz ushbu keylarning (kalitlarning) nomini boshqarishni(o'zgartirishni) xoh
 ]
 ```
 
-Siz bularning barchasini MahalliyBaza orqali qilishingiz mumkin:
+Siz bularning barchasini Ombor orqali qilishingiz mumkin:
 
 ### Document qo'shish va o'z kalitingizni kiritish
 
@@ -729,7 +729,7 @@ foydalanuvchilarniOlish()
 
 ### Consoledagi Loglarni o'chirish
 
-Odatda, MahalliyBaza ishlab chiqish (development) variantida quyidagi kabi ajoyib loglarni browserning dev-tools console bo'limida chiqarib boradi:
+Odatda, Ombor ishlab chiqish (development) variantida quyidagi kabi ajoyib loglarni browserning dev-tools console bo'limida chiqarib boradi:
 
 ![Consoleda chiqadigan loglar](images/console-loglar.png)
 
@@ -738,8 +738,8 @@ Siz bu loglarni `db.config.debug` boolean maydonigaa `false` qiymatini berish or
 Ma'lumotlar bazasini ishga tushirgandan so'ng va boshqa biror narsa bajarishdan oldin quyidagi kodni kiritish kerak:
 
 ```javascript
-import MahalliyBaza from 'mahalliybaza'
-let db = new MahalliyBaza('db')
+import Ombor from 'Ombor'
+let db = new Ombor('db')
 
 db.config.debug = false
 
@@ -753,17 +753,19 @@ db.config.debug = false
 
 Tez kunda... Playground tayyorlanish jarayonida.
 
-<!-- [Playground](https://github.com/OtabekSadiridinov/mahalliybaza-playground) bu MahalliyBaza va yuqoridagi barcha mavjud metodlar bilan ishlab ko'rish uchun mo'ljallangan dastur. -->
+<!-- [Playground](https://github.com/OtabekSadiridinov/Ombor-playground) bu Ombor va yuqoridagi barcha mavjud metodlar bilan ishlab ko'rish uchun mo'ljallangan dastur. -->
 
-<!-- Unda MahalliyBaza ma'lumotlar bazasiga yoki ma'lumotlar bazasidan turli xil kodlarni (qo'shish, yangilash, o'rnatish va olish uchun) ma'lumotlar to'plami mavjud.
+<!-- Unda Ombor ma'lumotlar bazasiga yoki ma'lumotlar bazasidan turli xil kodlarni (qo'shish, yangilash, o'rnatish va olish uchun) ma'lumotlar to'plami mavjud.
 
 Siz ushbu kodlarini browserda ishga tushirishingiz va (agar xohlasangiz, ularni tahrirlashingiz mumkin) natijasini browser dev-tools oynasining applications bo'limining IndexedDB ma'lumotlar bazasi qismida va console bo'limida kuzatishingiz mumkin.
 
 ![IndexedDB Store - Own Keys](images/playground.png)
 
-[Playground and launch instructions](https://github.com/OtabekSadiridinov/mahalliybaza-playground) -->
+[Playground and launch instructions](https://github.com/OtabekSadiridinov/Ombor-playground) -->
 
 
 ## Savol yoki takliflar
-Ushbu `MahalliyBaza` nomli kutubxona borasida savollar, fikrlar, e'tirozlar, Ushbu reponing `issues` bo'limida qoldiring. Shuningdex, xatoliklar bo'lsa, o'zbekcha tarjimalarni yashilash bo'yicha fikrlar bo'lsa ham yuqoridagi `issues` bo'limida qoldiring.
+Ushbu `Ombor` nomli kutubxona borasida savollar, fikrlar, e'tirozlar, Ushbu reponing `issues` bo'limida qoldiring. Shuningdex, xatoliklar bo'lsa, o'zbekcha tarjimalarni yashilash bo'yicha fikrlar bo'lsa ham yuqoridagi `issues` bo'limida qoldiring.
 **Albatta javob beramiz. E'tiboringiz uchun kattakon rahmat.**
+
+> Zero errors, zero warnings, zero vulnerabilities, zero effort.
