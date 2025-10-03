@@ -751,17 +751,77 @@ db.config.debug = false
 
 ## Playground
 
-Tez kunda... Playground tayyorlanish jarayonida.
+🎮 **Interaktiv Playground mavjud!**
 
-<!-- [Playground](https://github.com/OtabekSadiridinov/Ombor-playground) bu Ombor va yuqoridagi barcha mavjud metodlar bilan ishlab ko'rish uchun mo'ljallangan dastur. -->
+Ombor kutubxonasini brauzeringizda bevosita sinab ko'ring! Hech narsa o'rnatmasdan, kodingizni yozib, real vaqtda ishga tushiring.
 
-<!-- Unda Ombor ma'lumotlar bazasiga yoki ma'lumotlar bazasidan turli xil kodlarni (qo'shish, yangilash, o'rnatish va olish uchun) ma'lumotlar to'plami mavjud.
+### ✨ Xususiyatlar
+- **Real-time kod ijrosi** - Brauzerda bevosita ishga tushirish
+- **Console chiqishi** - console.log, error, warn ko'rsatish
+- **6 ta tayyor misol** - CRUD operatsiyalari uchun tayyor kod namunalari
+- **IndexedDB tozalash** - Ma'lumotlar bazasini tozalash funksiyasi
+- **Keyboard shortcuts** - `Ctrl+Enter` / `Cmd+Enter` 
+- **Responsive dizayn** - Desktop va mobile qurilmalarda ishlaydi
+- **Dark/Light theme** - VitePress theme bilan mos
 
-Siz ushbu kodlarini browserda ishga tushirishingiz va (agar xohlasangiz, ularni tahrirlashingiz mumkin) natijasini browser dev-tools oynasining applications bo'limining IndexedDB ma'lumotlar bazasi qismida va console bo'limida kuzatishingiz mumkin.
+### 🚀 Qanday ishlatish?
 
-![IndexedDB Store - Own Keys](images/playground.png)
+#### Online (GitHub Pages)
+Bevosita brauzeringizda oching:
+**[https://otabekoff.github.io/ombor/playground](https://otabekoff.github.io/ombor/playground)**
 
-[Playground and launch instructions](https://github.com/OtabekSadiridinov/Ombor-playground) -->
+#### Local (development)
+```bash
+# Repository'ni clone qiling
+git clone https://github.com/otabekoff/ombor.git
+cd ombor
+
+# Dependencies'larni o'rnating
+npm install
+
+# Docs serverini ishga tushiring
+npm run docs:dev
+
+# Brauzerda oching
+# http://localhost:5173/playground
+```
+
+### 📊 Oddiy misol
+
+```javascript
+// Ma'lumot qo'shish
+const db = new Ombor('myDatabase')
+
+await db.collection('users').add({
+  name: 'Otabek',
+  age: 25,
+  city: 'Toshkent'
+})
+
+// Ma'lumotlarni o'qish
+const users = await db.collection('users').get()
+console.log('Foydalanuvchilar:', users)
+```
+
+### 💡 Tayyor misollar
+Playground'da quyidagi tayyor misollar mavjud:
+1. **Ma'lumot Qo'shish** - `add()` metodi bilan ishlash
+2. **Ma'lumotlarni O'qish** - `get()` metodi
+3. **Filterlash** - `orderBy()` va `limit()`
+4. **Yangilash** - `update()` metodi
+5. **O'chirish** - `delete()` metodi
+6. **Murakkab Misol** - To-Do ilovasi (Full CRUD)
+
+### 🎓 O'xshash playgroundlar
+Ombor Playground quyidagi mashhur playgroundlardan ilhom oldi:
+- [Kotlin Playground](https://play.kotlinlang.org/)
+- [Vue Playground](https://play.vuejs.org/)
+- [W3Schools Tryit Editor](https://www.w3schools.com/tryit/)
+
+### 📚 Ko'proq ma'lumot
+- [Playground hujjatlari](./PLAYGROUND.md)
+- [Developer guide](./PLAYGROUND_DEVELOPMENT.md)
+- [Xususiyatlar ro'yxati](./PLAYGROUND_SUMMARY.md)
 
 
 ## Savol yoki takliflar
