@@ -2,6 +2,9 @@
 
 Firebasega uslubidagi, offalyn, mahalliy ma'lumotlar bazasi.
 
+> [!NOTE]
+> Learn more in detail at [Ombor Docs](otabekoff.github.io/ombor/)
+
 Ombor sizga Firebase uslubidagi sodda, kuchli, foydalanuvchi brauzerida saqlanadigan,IndexedDB ma'lumotlar bazasida ishlashni osonlashtiradigan offlayn ma'lumotlar bazasini taqdim etadi.
 
 Siz xohlagancha ma'lumot bazalarini yaratishingiz mumkin.
@@ -17,30 +20,30 @@ Ombor [LocalForage](https://github.com/localForage/localForage) yordamida tuzilg
 ## Boshlashdan avval bilib qo'yishingiz yaxshi bo'lgan atamalar.
 
 > Atamalar... Quyida ishlatilish mumkin bo'lgan ma'nolarda keltirildi.
-- **Metod** -
-- **Order** -
-- **OrderBy** -
-- **Ascending** -
-- **Descending** -
-- **Key(s)** -
-- **Limit** -
-- **Field** - maydon. O'zgaruvchi kaliti va qiymati.
-- **Document** - hujjat yoki ma'lumot.
-- **Collection** - documentlar to'plami.
-- **Databaza yoki database** - ma'lumotlar bazasi. Collectionlar saqlanadigan joy.
-- **Add** - qo'shish.
-**Get** - olish.
-- **Update** - yangilash.
-- **Set** - Bu yerda qayta yozish orqali yangilash, o'rnatish ma'nosida.
-- **Delete** - o'chirish.
-- **Overwrite** - ustiga yozish / qayta yozish.
-- **Promise(s)** -
-- **Async/await** -
-- **Console** - 
-- **Log** -
-- **Error** -
-- **Then** -
-- **Playground** - 
+- **Metod (Method)** - Funksiya, amal. Masalan: `.add()`, `.get()`, `.update()` - bular metodlar.
+- **Order** - Tartib. Ma'lumotlarni qanday tartibda saralash yoki ko'rsatish.
+- **OrderBy** - Bo'yicha tartiblash. Ma'lumotlarni ma'lum bir maydon bo'yicha saralash metodi.
+- **Ascending (asc)** - O'suvchi tartibda. Kichikdan kattaga, A dan Z gacha. Masalan: 1, 2, 3 yoki A, B, C.
+- **Descending (desc)** - Kamayuvchi tartibda. Kattadan kichikka, Z dan A gacha. Masalan: 3, 2, 1 yoki Z, Y, X.
+- **Key(s)** - Kalit. Har bir documentning yagona identifikatori (ID). IndexedDB da saqlash uchun ishlatiladi.
+- **Limit** - Chegara, cheklash. Nechta natija qaytarishni cheklash. Masalan: `.limit(10)` - faqat 10 ta document qaytaradi.
+- **Field** - Maydon. Obyektdagi xususiyat, kalit va qiymat juftligi. Masalan: `{ ism: 'Otabek' }` da `ism` - maydon, `'Otabek'` - qiymat.
+- **Document** - Hujjat yoki ma'lumot. Bitta obyekt, masalan: `{ id: 1, ism: 'Otabek', yosh: 19 }`.
+- **Collection** - To'plam. Documentlar to'plami. Masalan: `foydalanuvchilar` collection - barcha foydalanuvchilar ma'lumotlari.
+- **Databaza yoki Database** - Ma'lumotlar bazasi. Collectionlar saqlanadigan joy. Ombor da siz bir nechta databaza yaratishingiz mumkin.
+- **Add** - Qo'shish. Yangi document qo'shish.
+- **Get** - Olish. Ma'lumotni o'qish, olish.
+- **Update** - Yangilash. Mavjud documentning bir qismini o'zgartirish. Qolgan qismi o'zgarishsiz qoladi.
+- **Set** - O'rnatish. Bu yerda qayta yozish orqali yangilash ma'nosida. Butun documentni almashtirib yozish.
+- **Delete** - O'chirish. Document yoki collectionni o'chirish.
+- **Overwrite** - Ustiga yozish, qayta yozish. Eski ma'lumotni to'liq yangi ma'lumot bilan almashtirish.
+- **Promise** - Va'da. JavaScript'da asinxron operatsiyalarni boshqarish uchun obyekt. `.then()` va `.catch()` bilan ishlaydi.
+- **Async/Await** - Asinxron/Kutmoq. Promiselar bilan ishlashning zamonaviy usuli. Kodni o'qishni osonlashtiradi.
+- **Console** - Konsol. Brauzer dasturchilar vositalari (Dev Tools) da JavaScript kodi natijalarini ko'rish joyi.
+- **Log** - Jurnal, yozuv. Console'ga xabar chiqarish. Masalan: `console.log('Salom')`.
+- **Error** - Xatolik. Dasturda yuz bergan muammo. Masalan: `console.error('Xato yuz berdi')`.
+- **Then** - Keyin. Promise muvaffaqiyatli bo'lganda bajariladigan funksiya. Masalan: `.then(natija => { ... })`.
+- **Playground** - O'yin maydoni. Kodni sinab ko'rish, tajriba o'tkazish uchun interaktiv muhit. 
 
 ## Mundarija <!-- omit in toc -->
 
