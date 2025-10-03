@@ -133,7 +133,7 @@ await cacheDb.collection('api-responses').add({
 
 ### .env fayl
 
-```env
+```txt
 VITE_DB_NAME=myapp
 VITE_DB_DEBUG=true
 ```
@@ -147,7 +147,7 @@ db.config.debug = import.meta.env.VITE_DB_DEBUG === 'true'
 
 ### Turli environmentlar
 
-```env
+```txt
 # .env.development
 VITE_DB_NAME=myapp-dev
 VITE_DB_DEBUG=true
