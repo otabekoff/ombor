@@ -85,7 +85,7 @@ Collectiondan barcha documentlarni oladi.
 
 ### Qaytaradi
 
-Promise<Array>
+Promise\<Array\>
 
 ### Misollar
 

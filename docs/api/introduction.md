@@ -10,7 +10,7 @@ Ombor oddiy va intuitiv API taqdim etadi. Barcha operatsiyalar Promise qaytaradi
 |-------|--------|---------|
 | `collection(name)` | Collectionni tanlaydi | Ombor |
 | `add(data, key?)` | Yangi document qo'shadi | Promise |
-| `get(options?)` | Barcha documentlarni oladi | Promise<Array> |
+| `get(options?)` | Barcha documentlarni oladi | Promise\<Array\> |
 | `set(data)` | Collectionni ustiga yozadi | Promise |
 | `delete()` | Collectionni o'chiradi | Promise |
 
@@ -19,7 +19,7 @@ Ombor oddiy va intuitiv API taqdim etadi. Barcha operatsiyalar Promise qaytaradi
 | Metod | Ta'rif | Qaytadi |
 |-------|--------|---------|
 | `doc(criteria)` | Documentni tanlaydi | Ombor |
-| `get()` | Documentni oladi | Promise<Object> |
+| `get()` | Documentni oladi | Promise\<Object\> |
 | `update(data)` | Documentni yangilaydi | Promise |
 | `set(data)` | Documentni ustiga yozadi | Promise |
 | `delete()` | Documentni o'chiradi | Promise |

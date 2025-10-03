@@ -38,7 +38,7 @@ Tanlangan documentni oladi.
 
 ### Qaytaradi
 
-Promise<Object>
+Promise\<Object\>
 
 ### Misollar
 
