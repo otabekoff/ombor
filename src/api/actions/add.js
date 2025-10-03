@@ -1,4 +1,4 @@
-import UUID from 'ordered-uuid'
+import { v7 as uuidv7 } from 'uuid'
 import success from '../../api-utils/success'
 import error from '../../api-utils/error'
 import showUserErrors from '../../api-utils/showUserErrors'
@@ -22,9 +22,9 @@ export default function add(data, keyProvided) {
     return new Promise((resolve, reject) => {
       let key = null
 
-      // if no key provided, generate random, ordered key
+      // if no key provided, generate timestamp-ordered UUID v7
       if (!keyProvided) {
-        key = UUID.generate()
+        key = uuidv7()
       } else {
         key = keyProvided
       }
