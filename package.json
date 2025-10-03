@@ -1,7 +1,7 @@
 {
   "name": "ombor",
   "type": "module",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Firebasega uslubidagi, offalyn, mahalliy ma'lumotlar bazasi.",
   "main": "dist/ombor.umd.js",
   "module": "dist/ombor.es.js",

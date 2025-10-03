@@ -5,6 +5,21 @@ Barcha muhim o'zgarishlar shu yerda qayd etiladi.
 All notable changes to this project will be documented in this file.
 
 
+### [0.0.6](https://github.com/otabekoff/ombor/compare/v0.0.5...v0.0.6) (2025-10-03)
+
+
+### Bug Fixes
+
+* add missing https protocol to documentation link in README ([a19f708](https://github.com/otabekoff/ombor/commit/a19f70860550c2de67f9a27e093c9f5ad87488e9))
+
+
+### Documentation
+
+* add comprehensive documentation review summary ([c9adf16](https://github.com/otabekoff/ombor/commit/c9adf1676ab5c2585f1065d8a6c35f2161f01032))
+* add comprehensive LICENSE, CODE_OF_CONDUCT, SECURITY and improve README terms ([72dedf5](https://github.com/otabekoff/ombor/commit/72dedf579fcaee12252c34e8202836f2a59516a4))
+* add comprehensive release notes for v0.0.5 ([a7df994](https://github.com/otabekoff/ombor/commit/a7df9945ee1a73b1e81635447c1b739986558d1d))
+* enhance DEPRECATION_NOTICE with comprehensive release-please migration guide ([60ba883](https://github.com/otabekoff/ombor/commit/60ba88306613dd85a331ba07bb0fe6f7007e1c58))
+
 ### [0.0.5](https://github.com/otabekoff/ombor/compare/v0.0.4...v0.0.5) (2025-10-03)
 
 
