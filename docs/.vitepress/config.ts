@@ -16,8 +16,8 @@ export default defineConfig({
       { text: 'Bosh sahifa', link: '/' },
       { text: 'Qo\'llanma', link: '/guide/getting-started' },
       { text: 'API', link: '/api/introduction' },
+      { text: 'Misollar', link: '/guide/examples' },
       { text: '🎮 Tajriba maydoni (sinovda)', link: '/playground' },
-      { text: 'Misollar', link: '/guide/examples' }
     ],
 
     sidebar: {

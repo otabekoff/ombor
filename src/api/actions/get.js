@@ -45,7 +45,20 @@ export default function get(
           if (!options.keys) {
             collection.sort((a, b) => {
               if (!a.hasOwnProperty(orderByProperty) || !b.hasOwnProperty(orderByProperty)) return 0
-              return a[orderByProperty].toString().localeCompare(b[orderByProperty].toString())
+
+              const aVal = a[orderByProperty]
+              const bVal = b[orderByProperty]
+
+              // Handle null/undefined (put at end)
+              if (aVal === null || aVal === undefined) return 1
+              if (bVal === null || bVal === undefined) return -1
+
+              // Type-aware comparison for numbers
+              if (typeof aVal === 'number' && typeof bVal === 'number') {
+                return aVal - bVal
+              }
+
+              return aVal.toString().localeCompare(bVal.toString())
             })
           } else {
             collection.sort((a, b) => {
@@ -54,9 +67,20 @@ export default function get(
                 !b.data.hasOwnProperty(orderByProperty)
               )
                 return 0
-              return a.data[orderByProperty]
-                .toString()
-                .localeCompare(b.data[orderByProperty].toString())
+
+              const aVal = a.data[orderByProperty]
+              const bVal = b.data[orderByProperty]
+
+              // Handle null/undefined (put at end)
+              if (aVal === null || aVal === undefined) return 1
+              if (bVal === null || bVal === undefined) return -1
+
+              // Type-aware comparison for numbers
+              if (typeof aVal === 'number' && typeof bVal === 'number') {
+                return aVal - bVal
+              }
+
+              return aVal.toString().localeCompare(bVal.toString())
             })
           }
         }
@@ -65,7 +89,7 @@ export default function get(
           collection.reverse()
         }
         // limit
-        if (limitBy) {
+        if (limitBy !== undefined && limitBy !== null) {
           logMessage += `, ${limitBy} ta document(lar)gacha checklandi`
           collection = collection.splice(0, limitBy)
         }
@@ -82,7 +106,7 @@ export default function get(
     const docSelectionCriteria = this.docSelectionCriteria
 
     const collection = []
-    let document = {}
+    let document = undefined // Initialize as undefined instead of {}
 
     // get document by criteria
     this.getDocumentByCriteria = () => {
@@ -98,6 +122,8 @@ export default function get(
               this,
               `${JSON.stringify(docSelectionCriteria)} bilan "${collectionName}" nomli collectionida documentlar topilmadi.`
             )
+            reset.call(this)
+            return document // Return undefined document
           } else {
             document = collection[0]
             logger.log.call(

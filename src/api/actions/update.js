@@ -25,12 +25,19 @@ export default function update(docUpdates) {
         })
         .then(() => {
           if (!docsToUpdate.length) {
-            reject(
-              error.call(
+            logger.error.call(
+              this,
+              `${JSON.stringify(docSelectionCriteria)} bilan ${collectionName} collectionida documentlar topilmadi.`
+            )
+            // Resolve with success response indicating nothing was updated
+            resolve(
+              success.call(
                 this,
-                `${JSON.stringify(docSelectionCriteria)} bilan ${collectionName} collectionida documentlar topilmadi.`
+                `${JSON.stringify(docSelectionCriteria)} dagi "${collectionName}" collectionida 0 document yangilandi.`,
+                docUpdates
               )
             )
+            return
           }
           if (docsToUpdate.length > 1) {
             logger.warn.call(
@@ -40,6 +47,8 @@ export default function update(docUpdates) {
           }
         })
         .then(() => {
+          if (!docsToUpdate.length) return // Skip if nothing to update
+
           docsToUpdate.forEach((docToUpdate, index) => {
             this.lf[collectionName]
               .setItem(docToUpdate.key, docToUpdate.newDocument)

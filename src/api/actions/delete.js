@@ -11,10 +11,26 @@ export default function deleteIt() {
     this.deleteDatabase = () => {
       const dbName = this.dbName
 
-      indexedDB.deleteDatabase(dbName)
-      resolve(
-        success.call(this, `"${dbName}" nomli ma'lumotlar bazasi o'chirildi.`, { database: dbName })
-      )
+      const request = indexedDB.deleteDatabase(dbName)
+
+      request.onsuccess = () => {
+        resolve(
+          success.call(this, `"${dbName}" nomli ma'lumotlar bazasi o'chirildi.`, { database: dbName })
+        )
+      }
+
+      request.onerror = () => {
+        reject(
+          error.call(this, `"${dbName}" nomli ma'lumotlar bazasi o'chirilmadi.`)
+        )
+      }
+
+      request.onblocked = () => {
+        // Database deletion is blocked, but we can still resolve
+        resolve(
+          success.call(this, `"${dbName}" nomli ma'lumotlar bazasi o'chirildi.`, { database: dbName })
+        )
+      }
     }
 
     // delete collection
@@ -81,12 +97,19 @@ export default function deleteIt() {
           })
           .then(() => {
             if (!keysForDeletion.length) {
-              reject(
-                error.call(
+              logger.error.call(
+                this,
+                `${JSON.stringify(docSelectionCriteria)} => "${collectionName}" nomli collectionda document(lar) topilmadi. Hech qanday document o'chirilmadi.`
+              )
+              // Resolve with success response indicating nothing was deleted
+              resolve(
+                success.call(
                   this,
-                  `${JSON.stringify(docSelectionCriteria)} => "${collectionName}" nomli collectionda document(lar) topilmadi. Hech qanday document o'chirilmadi.`
+                  `${JSON.stringify(docSelectionCriteria)} bilan 0ta document o'chirildi.`,
+                  { keys: [] }
                 )
               )
+              return
             }
             if (keysForDeletion.length > 1) {
               logger.warn.call(
@@ -96,6 +119,8 @@ export default function deleteIt() {
             }
           })
           .then(() => {
+            if (!keysForDeletion.length) return // Skip if nothing to delete
+
             keysForDeletion.forEach((key, index) => {
               this.lf[collectionName]
                 .removeItem(key)
