@@ -18,7 +18,6 @@ hero:
       link: /api/introduction
 
 features:
-  features:
   - icon: 🎮
     title: Interactive Playground
     details: Brauzeringizda bevosita sinab ko'ring! Kod yozing va natijalarni real vaqtda ko'ring.

@@ -1,4 +1,4 @@
 import Ombor from './ombor'
 
-export default Ombor
+// Named export only (no default export)
 export { Ombor }

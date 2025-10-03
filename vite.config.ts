@@ -8,6 +8,11 @@ export default defineConfig({
       outDir: 'dist/types'
     })
   ],
+  define: {
+    // Define process.env for UMD build (browser compatibility)
+    'process.env.NODE_ENV': JSON.stringify('production'),
+    'process.env': JSON.stringify({})
+  },
   build: {
     lib: {
       entry: 'src/index.ts',
@@ -18,7 +23,7 @@ export default defineConfig({
     rollupOptions: {
       external: ['localforage'],
       output: {
-        exports: 'named',
+        exports: 'named', // Named exports only
         globals: {
           localforage: 'localforage'
         }

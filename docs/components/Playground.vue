@@ -29,14 +29,20 @@
           <span class="panel-title">📝 JavaScript</span>
           <span class="panel-hint">Ctrl+Enter / Cmd+Enter - ishga tushirish</span>
         </div>
-        <textarea
-          v-model="code"
-          class="code-editor"
-          spellcheck="false"
-          @keydown.ctrl.enter.prevent="runCode"
-          @keydown.meta.enter.prevent="runCode"
-          placeholder="// Ombor kodingizni shu yerda yozing..."
-        ></textarea>
+        <div class="code-editor-wrapper">
+          <pre class="code-highlight" v-html="highlightedCode"></pre>
+          <textarea
+            v-model="code"
+            class="code-editor"
+            spellcheck="false"
+            @keydown.ctrl.enter.prevent="runCode"
+            @keydown.meta.enter.prevent="runCode"
+            @input="updateHighlight"
+            @scroll="syncScroll"
+            ref="codeTextarea"
+            placeholder="// Ombor kodingizni shu yerda yozing..."
+          ></textarea>
+        </div>
       </div>
 
       <div class="output-panel">
@@ -54,7 +60,7 @@
             :class="['console-log', `console-${log.type}`]"
           >
             <span class="log-icon">{{ getLogIcon(log.type) }}</span>
-            <span class="log-content">{{ formatLog(log.content) }}</span>
+            <pre class="log-content" v-html="formatLog(log.content)"></pre>
           </div>
         </div>
       </div>
@@ -70,14 +76,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
 const code = ref('')
 const output = ref([])
 const isRunning = ref(false)
 const selectedExample = ref('')
 const consoleOutput = ref(null)
+const codeTextarea = ref(null)
 const db = ref(null)
+
+const highlightedCode = computed(() => {
+  return highlightJS(code.value)
+})
 
 const defaultCode = `// Ombor kutubxonasini ishlatish
 const db = new Ombor('myDatabase')
@@ -113,7 +124,7 @@ await db.collection('users').add([
 
 console.log('Ma\\'lumotlar muvaffaqiyatli qo\\'shildi! ✅')
 `,
-  
+
   get: `// Ma'lumotlarni o'qish
 const db = new Ombor('myDatabase')
 
@@ -197,7 +208,7 @@ if (pendingTasks.length > 0) {
   await db.collection('todos')
     .doc({ title: pendingTasks[0].title })
     .update({ done: true })
-  
+
   console.log('Vazifa bajarildi! ✅')
 }
 
@@ -210,17 +221,49 @@ console.log(\`Jami: \${all.length}, Bajarilgan: \${completed}\`)
 
 onMounted(() => {
   code.value = defaultCode
-  
-  // Load Ombor library
-  const script = document.createElement('script')
-  script.src = 'https://cdn.jsdelivr.net/npm/ombor@latest/dist/ombor.umd.js'
-  script.onload = () => {
-    addLog('info', 'Ombor kutubxonasi yuklandi ✅')
+
+  // Load LocalForage first (Ombor dependency)
+  const localforageScript = document.createElement('script')
+  localforageScript.src = 'https://unpkg.com/localforage@1.10.0/dist/localforage.min.js'
+
+  localforageScript.onload = () => {
+    // Now load Ombor after LocalForage is loaded
+    const omborScript = document.createElement('script')
+    // Load from local build instead of CDN to get the latest version
+    omborScript.src = '/ombor.umd.js'
+
+    omborScript.onload = () => {
+      // Handle named export (Ombor.Ombor pattern for UMD)
+      if (window.Ombor) {
+        if (typeof window.Ombor === 'function') {
+          // Direct constructor
+          addLog('info', 'Ombor kutubxonasi yuklandi ✅')
+        } else if (window.Ombor.Ombor && typeof window.Ombor.Ombor === 'function') {
+          // UMD named export: window.Ombor.Ombor
+          window.Ombor = window.Ombor.Ombor
+          addLog('info', 'Ombor kutubxonasi yuklandi ✅')
+        } else {
+          addLog('error', 'Ombor constructor topilmadi')
+          console.log('window.Ombor:', window.Ombor)
+        }
+      } else {
+        addLog('error', 'Ombor eksporti topilmadi')
+      }
+    }
+
+    omborScript.onerror = () => {
+      addLog('error', 'Ombor kutubxonasini yuklashda xatolik yuz berdi')
+      addLog('info', 'Internetga ulanganingizni tekshiring yoki sahifani yangilang')
+    }
+
+    document.head.appendChild(omborScript)
   }
-  script.onerror = () => {
-    addLog('error', 'Ombor kutubxonasini yuklashda xatolik yuz berdi')
+
+  localforageScript.onerror = () => {
+    addLog('error', 'LocalForage kutubxonasini yuklashda xatolik')
   }
-  document.head.appendChild(script)
+
+  document.head.appendChild(localforageScript)
 })
 
 function loadExample() {
@@ -237,45 +280,57 @@ function resetCode() {
 
 async function runCode() {
   if (isRunning.value) return
-  
+
   isRunning.value = true
   clearOutput()
-  
+
   // Intercept console methods
   const originalLog = console.log
   const originalError = console.error
   const originalWarn = console.warn
-  
+
   console.log = (...args) => {
-    addLog('log', args)
+    // Filter out Ombor internal logs (styled with %c)
+    if (args[0] !== '%cOmbor') {
+      addLog('log', args)
+    }
     originalLog(...args)
   }
-  
+
   console.error = (...args) => {
-    addLog('error', args)
+    // Filter out Ombor internal logs
+    if (args[0] !== '%cOmbor') {
+      addLog('error', args)
+    }
     originalError(...args)
   }
-  
+
   console.warn = (...args) => {
-    addLog('warn', args)
+    // Filter out Ombor internal logs
+    if (args[0] !== '%cOmbor') {
+      addLog('warn', args)
+    }
     originalWarn(...args)
   }
-  
+
   try {
     // Check if Ombor is loaded
     if (typeof window.Ombor === 'undefined') {
       throw new Error('Ombor kutubxonasi hali yuklanmagan. Bir oz kuting...')
     }
-    
+
+    // Get the Ombor constructor (handle UMD named export)
+    const OmborConstructor = (window.Ombor && window.Ombor.Ombor) || window.Ombor
+
     // Create async function and execute
     const asyncFunction = new Function('Ombor', `
       return (async () => {
         ${code.value}
       })()
     `)
-    
-    await asyncFunction(window.Ombor)
-    
+
+    await asyncFunction(OmborConstructor)
+
     if (output.value.length === 0) {
       addLog('success', 'Kod muvaffaqiyatli bajarildi! ✅')
     }
@@ -294,11 +349,11 @@ async function clearDatabase() {
   try {
     const dbName = 'myDatabase'
     const request = indexedDB.deleteDatabase(dbName)
-    
+
     request.onsuccess = () => {
       addLog('success', 'Ma\'lumotlar bazasi tozalandi! 🗑️')
     }
-    
+
     request.onerror = () => {
       addLog('error', 'Ma\'lumotlar bazasini tozalashda xatolik')
     }
@@ -313,7 +368,7 @@ function clearOutput() {
 
 function addLog(type, content) {
   output.value.push({ type, content })
-  
+
   // Auto scroll to bottom
   setTimeout(() => {
     if (consoleOutput.value) {
@@ -337,26 +392,153 @@ function formatLog(content) {
   if (Array.isArray(content)) {
     return content.map(item => {
       if (typeof item === 'object') {
-        return JSON.stringify(item, null, 2)
+        return syntaxHighlightJSON(JSON.stringify(item, null, 2))
       }
-      return String(item)
+      return escapeHtml(String(item))
     }).join(' ')
   }
-  
+
   if (typeof content === 'object') {
-    return JSON.stringify(content, null, 2)
+    return syntaxHighlightJSON(JSON.stringify(content, null, 2))
   }
-  
-  return String(content)
+
+  return escapeHtml(String(content))
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div')
+  div.textContent = text
+  return div.innerHTML
+}
+
+function syntaxHighlightJSON(json) {
+  json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)/g, function (match) {
+    let cls = 'json-number'
+    if (match.startsWith('"')) {
+      if (match.endsWith(':')) {
+        cls = 'json-key'
+      } else {
+        cls = 'json-string'
+      }
+    } else if (/true|false/.test(match)) {
+      cls = 'json-boolean'
+    } else if (/null/.test(match)) {
+      cls = 'json-null'
+    }
+    return '<span class="' + cls + '">' + match + '</span>'
+  })
+}
+
+function highlightJS(code) {
+  // Escape HTML
+  const escapeHtml = (str) => str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+
+  let result = ''
+  let i = 0
+
+  while (i < code.length) {
+    // Check for comments
+    if (code[i] === '/' && code[i + 1] === '/') {
+      let comment = ''
+      while (i < code.length && code[i] !== '\n') {
+        comment += code[i]
+        i++
+      }
+      result += '<span class="js-comment">' + escapeHtml(comment) + '</span>'
+      continue
+    }
+
+    // Check for strings
+    if (code[i] === '"' || code[i] === "'" || code[i] === '`') {
+      const quote = code[i]
+      let str = quote
+      i++
+      while (i < code.length) {
+        if (code[i] === '\\' && i + 1 < code.length) {
+          str += code[i] + code[i + 1]
+          i += 2
+          continue
+        }
+        if (code[i] === quote) {
+          str += code[i]
+          i++
+          break
+        }
+        str += code[i]
+        i++
+      }
+      result += '<span class="js-string">' + escapeHtml(str) + '</span>'
+      continue
+    }
+
+    // Check for numbers
+    if (/\d/.test(code[i])) {
+      let num = ''
+      while (i < code.length && /[\d.]/.test(code[i])) {
+        num += code[i]
+        i++
+      }
+      result += '<span class="js-number">' + escapeHtml(num) + '</span>'
+      continue
+    }
+
+    // Check for keywords and identifiers
+    if (/[a-zA-Z_$]/.test(code[i])) {
+      let word = ''
+      while (i < code.length && /[a-zA-Z0-9_$]/.test(code[i])) {
+        word += code[i]
+        i++
+      }
+
+      const keywords = ['await', 'async', 'const', 'let', 'var', 'function', 'return',
+        'if', 'else', 'for', 'while', 'do', 'switch', 'case', 'break', 'continue',
+        'try', 'catch', 'finally', 'throw', 'new', 'class', 'extends', 'import',
+        'export', 'default', 'from', 'as', 'typeof', 'instanceof', 'in', 'of',
+        'this', 'super', 'static', 'get', 'set', 'delete', 'void', 'yield', 'debugger']
+
+      const booleans = ['true', 'false', 'null', 'undefined', 'NaN', 'Infinity']
+
+      if (keywords.includes(word)) {
+        result += '<span class="js-keyword">' + escapeHtml(word) + '</span>'
+      } else if (booleans.includes(word)) {
+        result += '<span class="js-boolean">' + escapeHtml(word) + '</span>'
+      } else {
+        result += escapeHtml(word)
+      }
+      continue
+    }
+
+    // Regular character
+    result += escapeHtml(code[i])
+    i++
+  }
+
+  return result
+}
+
+function syncScroll(event) {
+  const highlight = event.target.previousElementSibling
+  if (highlight) {
+    highlight.scrollTop = event.target.scrollTop
+    highlight.scrollLeft = event.target.scrollLeft
+  }
+}
+
+function updateHighlight() {
+  // Computed property will handle this automatically
 }
 </script>
 
 <style scoped>
 .playground-container {
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
+  /* border: 1px solid var(--vp-c-divider); */
+  /* border-radius: 8px; */
   overflow: hidden;
-  margin: 2rem 0;
+  /* margin: 2rem 0; */
   background: var(--vp-c-bg);
 }
 
@@ -495,22 +677,83 @@ function formatLog(content) {
   color: var(--vp-c-text-1);
 }
 
-.code-editor {
+.code-editor-wrapper {
+  position: relative;
   flex: 1;
+  overflow: hidden;
+}
+
+.code-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1rem;
+  margin: 0;
+  border: none;
+  background: transparent;
+  color: var(--vp-c-text-1);
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow: auto;
+  white-space: pre;
+  word-wrap: normal;
+  pointer-events: none;
+  tab-size: 2;
+  z-index: 1;
+}
+
+.code-editor {
+  position: relative;
+  width: 100%;
+  height: 100%;
   padding: 1rem;
   border: none;
-  background: var(--vp-c-bg);
-  color: var(--vp-c-text-1);
+  background: transparent;
+  color: transparent;
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   font-size: 14px;
   line-height: 1.6;
   resize: none;
   outline: none;
   tab-size: 2;
+  overflow: auto;
+  caret-color: var(--vp-c-text-1);
+  z-index: 2;
 }
 
 .code-editor::placeholder {
   color: var(--vp-c-text-3);
+}
+
+/* JavaScript Syntax Highlighting */
+.code-highlight :deep(.js-keyword) {
+  color: #c678dd;
+  font-weight: 600;
+}
+
+.code-highlight :deep(.js-string) {
+  color: #98c379;
+}
+
+.code-highlight :deep(.js-number) {
+  color: #d19a66;
+}
+
+.code-highlight :deep(.js-boolean) {
+  color: #56b6c2;
+  font-weight: 600;
+}
+
+.code-highlight :deep(.js-function) {
+  color: #61afef;
+}
+
+.code-highlight :deep(.js-comment) {
+  color: #5c6370;
+  font-style: italic;
 }
 
 .console-output {
@@ -566,6 +809,32 @@ function formatLog(content) {
   flex: 1;
   white-space: pre-wrap;
   word-break: break-word;
+  margin: 0;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+/* JSON Syntax Highlighting */
+.log-content :deep(.json-key) {
+  color: #e06c75;
+  font-weight: 500;
+}
+
+.log-content :deep(.json-string) {
+  color: #98c379;
+}
+
+.log-content :deep(.json-number) {
+  color: #d19a66;
+}
+
+.log-content :deep(.json-boolean) {
+  color: #56b6c2;
+  font-weight: 500;
+}
+
+.log-content :deep(.json-null) {
+  color: #c678dd;
+  font-weight: 500;
 }
 
 .playground-info {
