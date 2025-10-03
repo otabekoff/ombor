@@ -18,8 +18,14 @@ hero:
       link: /api/introduction
 
 features:
+  features:
+  - icon: 🎮
+    title: Interactive Playground
+    details: Brauzeringizda bevosita sinab ko'ring! Kod yozing va natijalarni real vaqtda ko'ring.
+    link: /playground
+    linkText: Playgroundni ochish
   - icon: 🚀
-    title: Firebase uslubi
+    title: Oson Boshlash
     details: Firebase Cloud Firestore kabi oddiy va intuitiv API. Collection va Document tushunchasi bilan ishlash.
   - icon: 📦
     title: Offlayn birinchi
