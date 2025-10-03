@@ -1,10 +1,15 @@
 import { defineConfig } from 'vitepress'
 
+// Automatically detect environment
+// In production (GitHub Pages): use /ombor/
+// In development (local): use /
+const base = process.env.NODE_ENV === 'production' ? '/ombor/' : '/'
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "Ombor.js",
   description: "Ombor- sizga Firebase uslubidagi sodda, kuchli, foydalanuvchi brauzerida saqlanadigan, IndexedDB ma'lumotlar bazasida ishlashni osonlashtiradigan offlayn ma'lumotlar bazasini taqdim etadi.",
-  base: '/ombor/', // GitHub Pages base path
+  base, // Auto-detected base path
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
