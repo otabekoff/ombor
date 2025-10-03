@@ -9,9 +9,6 @@
   "files": [
     "dist"
   ],
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/@OtabekSadiridinov"
-  },
   "scripts": {
     "bundle": "npm run build",
     "dev": "vite",
