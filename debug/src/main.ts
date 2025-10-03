@@ -4,7 +4,7 @@
  */
 
 import './style.css'
-import Ombor from 'ombor'
+import { Ombor } from 'ombor'
 import { basicOperationsPage } from './pages/basic'
 import { crudPage } from './pages/crud'
 import { filteringPage } from './pages/filtering'

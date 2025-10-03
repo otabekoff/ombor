@@ -3,7 +3,7 @@
 Firebasega uslubidagi, offalyn, mahalliy ma'lumotlar bazasi.
 
 > [!NOTE]
-> Learn more in detail at [Ombor Docs](otabekoff.github.io/ombor/)
+> Learn more in detail at [Ombor Docs](https://otabekoff.github.io/ombor/)
 
 Ombor sizga Firebase uslubidagi sodda, kuchli, foydalanuvchi brauzerida saqlanadigan,IndexedDB ma'lumotlar bazasida ishlashni osonlashtiradigan offlayn ma'lumotlar bazasini taqdim etadi.
 
