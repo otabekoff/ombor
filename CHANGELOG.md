@@ -5,6 +5,18 @@ Barcha muhim o'zgarishlar shu yerda qayd etiladi.
 All notable changes to this project will be documented in this file.
 
 
+### [0.0.5](https://github.com/otabekoff/ombor/compare/v0.0.4...v0.0.5) (2025-10-03)
+
+
+### Features
+
+* migrate from ordered-uuid to modern uuid@13.0.0 ([a16d573](https://github.com/otabekoff/ombor/commit/a16d5739fbd960749697f5dc4e5449fa34f06739))
+
+
+### Documentation
+
+* add release notes for v0.0.4 ([e3b3493](https://github.com/otabekoff/ombor/commit/e3b3493444b979fea3ffbd5aca2ab519a01d0bbf))
+
 ### [0.0.4](https://github.com/otabekoff/ombor/compare/v0.0.3...v0.0.4) (2025-10-03)
 
 
