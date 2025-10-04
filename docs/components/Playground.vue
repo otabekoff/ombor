@@ -229,8 +229,8 @@ onMounted(() => {
   localforageScript.onload = () => {
     // Now load Ombor after LocalForage is loaded
     const omborScript = document.createElement('script')
-    // Load from CDN (jsDelivr) to get the published NPM version
-    omborScript.src = 'https://cdn.jsdelivr.net/npm/ombor@latest/dist/ombor.umd.js'
+    // Use local build (fixed version) for both dev and production until new version is published
+    omborScript.src = '/ombor.umd.js'  // Served from docs/public/
 
     omborScript.onload = () => {
       // Handle named export (Ombor.Ombor pattern for UMD)
