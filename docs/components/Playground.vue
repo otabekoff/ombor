@@ -233,7 +233,7 @@ onMounted(() => {
     // - For local development/preview: use local fixed build
     // - For production (GitHub Pages): use CDN with fallback
     const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-    
+
     if (isLocalhost) {
       // Use local build for development/preview
       omborScript.src = '/ombor.umd.js'  // Served from docs/public/
@@ -266,10 +266,10 @@ onMounted(() => {
     omborScript.onerror = () => {
       // Try fallback CDN (unpkg)
       addLog('warn', 'jsDelivr CDN bilan muammo, unpkg\'dan yuklanmoqda...')
-      
+
       const fallbackScript = document.createElement('script')
       fallbackScript.src = 'https://unpkg.com/ombor@latest/dist/ombor.umd.js'
-      
+
       fallbackScript.onload = () => {
         // Handle named export (same logic as above)
         if (window.Ombor) {
@@ -285,13 +285,13 @@ onMounted(() => {
           addLog('error', 'Ombor eksporti topilmadi')
         }
       }
-      
+
       fallbackScript.onerror = () => {
         addLog('error', 'Ombor kutubxonasini yuklashda xatolik yuz berdi')
         addLog('info', 'Internetga ulanganingizni tekshiring yoki sahifani yangilang')
         addLog('info', 'Yoki ombor@latest NPM paketida muammo bo\'lishi mumkin')
       }
-      
+
       document.head.appendChild(fallbackScript)
     }
 
