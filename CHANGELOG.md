@@ -5,6 +5,16 @@ Barcha muhim o'zgarishlar shu yerda qayd etiladi.
 All notable changes to this project will be documented in this file.
 
 
+### [0.0.7](https://github.com/otabekoff/ombor/compare/v0.0.6...v0.0.7) (2025-10-04)
+
+
+### Bug Fixes
+
+* docs ([f84206a](https://github.com/otabekoff/ombor/commit/f84206a5644bf5160f044529ae8b459bde8f17db))
+* **format:** format delete.js file to resolve CI formatting check ([7d18e9d](https://github.com/otabekoff/ombor/commit/7d18e9da3d8007453ef5ead5ef5c2b89a677c353))
+* **playground:** use CDN for Ombor library instead of local path ([989d694](https://github.com/otabekoff/ombor/commit/989d694593ae2407d2865cde51e094157f69333f))
+* **playground:** use local fixed UMD build to resolve process.env error ([1ce00c2](https://github.com/otabekoff/ombor/commit/1ce00c2478202f957fad57706eb15bad281bb073))
+
 ### [0.0.6](https://github.com/otabekoff/ombor/compare/v0.0.5...v0.0.6) (2025-10-03)
 
 
