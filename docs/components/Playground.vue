@@ -229,8 +229,8 @@ onMounted(() => {
   localforageScript.onload = () => {
     // Now load Ombor after LocalForage is loaded
     const omborScript = document.createElement('script')
-    // Load from local build instead of CDN to get the latest version
-    omborScript.src = '/ombor.umd.js'
+    // Load from CDN (jsDelivr) to get the published NPM version
+    omborScript.src = 'https://cdn.jsdelivr.net/npm/ombor@latest/dist/ombor.umd.js'
 
     omborScript.onload = () => {
       // Handle named export (Ombor.Ombor pattern for UMD)
@@ -252,8 +252,35 @@ onMounted(() => {
     }
 
     omborScript.onerror = () => {
-      addLog('error', 'Ombor kutubxonasini yuklashda xatolik yuz berdi')
-      addLog('info', 'Internetga ulanganingizni tekshiring yoki sahifani yangilang')
+      // Try fallback CDN (unpkg)
+      addLog('warn', 'jsDelivr CDN bilan muammo, unpkg\'dan yuklanmoqda...')
+      
+      const fallbackScript = document.createElement('script')
+      fallbackScript.src = 'https://unpkg.com/ombor@latest/dist/ombor.umd.js'
+      
+      fallbackScript.onload = () => {
+        // Handle named export (same logic as above)
+        if (window.Ombor) {
+          if (typeof window.Ombor === 'function') {
+            addLog('info', 'Ombor kutubxonasi yuklandi (unpkg CDN) ✅')
+          } else if (window.Ombor.Ombor && typeof window.Ombor.Ombor === 'function') {
+            window.Ombor = window.Ombor.Ombor
+            addLog('info', 'Ombor kutubxonasi yuklandi (unpkg CDN) ✅')
+          } else {
+            addLog('error', 'Ombor constructor topilmadi')
+          }
+        } else {
+          addLog('error', 'Ombor eksporti topilmadi')
+        }
+      }
+      
+      fallbackScript.onerror = () => {
+        addLog('error', 'Ombor kutubxonasini yuklashda xatolik yuz berdi')
+        addLog('info', 'Internetga ulanganingizni tekshiring yoki sahifani yangilang')
+        addLog('info', 'Yoki ombor@latest NPM paketida muammo bo\'lishi mumkin')
+      }
+      
+      document.head.appendChild(fallbackScript)
     }
 
     document.head.appendChild(omborScript)
