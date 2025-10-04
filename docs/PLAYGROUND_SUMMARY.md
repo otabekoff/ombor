@@ -75,7 +75,7 @@ npm run docs:dev
 ```
 
 ### 2. Playgroundni ochish
-Brauzerda: http://localhost:5175/playground
+Brauzerda: /playground (development server)
 
 Yoki navigatsiyadan: **"🎮 Playground"** tugmasini bosing
 
@@ -186,8 +186,8 @@ Playground sahifasi quyidagilar uchun foydali:
 
 ## 🔗 Foydali linklar
 
-- **Playground**: http://localhost:5175/playground
-- **Documentation**: http://localhost:5175/
+- **Playground**: /playground
+- **Documentation**: /
 - **GitHub**: https://github.com/otabekoff/ombor
 - **NPM**: https://www.npmjs.com/package/ombor
 

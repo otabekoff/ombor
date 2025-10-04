@@ -177,7 +177,7 @@ const db = new Ombor('testDB')      // ✅ Works!
 ```
 
 ### 3. Playground Test
-1. Open http://localhost:5173/playground
+1. Open /playground (on development server)
 2. Run default code
 3. ✅ No errors in console
 4. ✅ "Ombor kutubxonasi yuklandi ✅" message

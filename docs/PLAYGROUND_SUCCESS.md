@@ -26,7 +26,7 @@ Sizning **Ombor** kutubxonangiz uchun Kotlin Playground, W3Schools va Vue Playgr
 ### 📈 GitHub Commits
 
 ```
-✅ Commit 1: feat(playground): add interactive playground 
+✅ Commit 1: feat(playground): add interactive playground
    Files changed: 11
    Insertions: +1,519
    Deletions: -1
@@ -96,7 +96,7 @@ Sizning **Ombor** kutubxonangiz uchun Kotlin Playground, W3Schools va Vue Playgr
 
 ### Local Development
 ```
-📍 http://localhost:5175/playground
+📍 /playground (runs on localhost during development)
 ```
 
 ### GitHub Pages (Production)
@@ -339,7 +339,7 @@ Playground'ni sinab ko'ring va fikrlaringizni GitHub Issues'da qoldiring:
 ## 🔗 Foydali linklar
 
 ### Playground
-- 🎮 Local: http://localhost:5175/playground
+- 🎮 Local: /playground (development server)
 - 🌐 Production: https://otabekoff.github.io/ombor/playground
 
 ### Hujjatlar

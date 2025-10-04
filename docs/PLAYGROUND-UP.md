@@ -65,7 +65,7 @@ Bu foydalanuvchilarga eng so'nggi versiyani ko'rishga imkon beradi.
    ```
 
 2. **Playgroundni oching**:
-   - Brauzerda: http://localhost:5173/playground (yoki ko'rsatilgan portda)
+   - Brauzerda: /playground (development server)
    - Navigatsiyada "🎮 Playground" tugmasini bosing
 
 3. **Kod yozing va ishga tushiring**:

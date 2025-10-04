@@ -2,12 +2,12 @@
 
 ## Keng tarqalgan xatoliklar va yechimlar
 
-### 1. ❌ "localhost page can't be found" (404 Error)
+### 1. ❌ "development server page can't be found" (404 Error)
 
 **Muammo:**
 ```
-This localhost page can't be found
-http://localhost:5174/
+This development server page can't be found
+Development server not running
 HTTP ERROR 404
 ```
 

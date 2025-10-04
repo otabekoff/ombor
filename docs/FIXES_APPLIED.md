@@ -198,7 +198,7 @@ npm run docs:dev
 ## 🧪 Testlash
 
 ### Manual Test
-1. ✅ Bosh sahifa ochiladi (`http://localhost:5173/`)
+1. ✅ Bosh sahifa ochiladi (development server)
 2. ✅ Features ko'rsatiladi (7 ta)
 3. ✅ Playground ochiladi (`/playground`)
 4. ✅ Console'da xatoliklar yo'q

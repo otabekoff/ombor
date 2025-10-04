@@ -6,13 +6,13 @@
 ```bash
 npm run docs:dev
 ```
-Opens at: http://localhost:5173 (or next available port)
+Opens at development server (check console for exact port)
 
 ### Library Dev Server (Vite)
 ```bash
 npm run dev
 ```
-Opens at: http://localhost:5173 (for library development)
+Opens at development server (for library development)
 
 ## Common Commands
 
@@ -49,7 +49,7 @@ git push --follow-tags origin main  # Push + trigger auto-publish
 
 ## 🐛 Troubleshooting
 
-### "Can't find localhost:5175"
+### "Can't find development server"
 **Problem:** Running `npm run dev` instead of `npm run docs:dev`
 
 **Solution:**
@@ -65,7 +65,7 @@ npm run docs:dev
 **Problem:** Wrong base path in local development
 
 **Solution:** The config now auto-detects:
-- **Local:** `base: '/'` → http://localhost:5173/
+- **Local:** `base: '/'` → served on development server
 - **GitHub Pages:** `base: '/ombor/'` → https://otabekoff.github.io/ombor/
 
 ### "Styles not loading on GitHub Pages"
@@ -138,8 +138,8 @@ git push
 ## 🌐 URLs
 
 ### Local Development
-- **Documentation:** http://localhost:5173/
-- **Library Preview:** http://localhost:5175/
+- **Documentation:** Development server (check console output for URL)
+- **Library Preview:** Development server (check console output for URL)
 
 ### Production
 - **Documentation:** https://otabekoff.github.io/ombor/
