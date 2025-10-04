@@ -15,20 +15,22 @@ export default function deleteIt() {
 
       request.onsuccess = () => {
         resolve(
-          success.call(this, `"${dbName}" nomli ma'lumotlar bazasi o'chirildi.`, { database: dbName })
+          success.call(this, `"${dbName}" nomli ma'lumotlar bazasi o'chirildi.`, {
+            database: dbName
+          })
         )
       }
 
       request.onerror = () => {
-        reject(
-          error.call(this, `"${dbName}" nomli ma'lumotlar bazasi o'chirilmadi.`)
-        )
+        reject(error.call(this, `"${dbName}" nomli ma'lumotlar bazasi o'chirilmadi.`))
       }
 
       request.onblocked = () => {
         // Database deletion is blocked, but we can still resolve
         resolve(
-          success.call(this, `"${dbName}" nomli ma'lumotlar bazasi o'chirildi.`, { database: dbName })
+          success.call(this, `"${dbName}" nomli ma'lumotlar bazasi o'chirildi.`, {
+            database: dbName
+          })
         )
       }
     }
