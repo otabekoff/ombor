@@ -229,8 +229,20 @@ onMounted(() => {
   localforageScript.onload = () => {
     // Now load Ombor after LocalForage is loaded
     const omborScript = document.createElement('script')
-    // Use local build (fixed version) for both dev and production until new version is published
-    omborScript.src = '/ombor.umd.js'  // Served from docs/public/
+    // Smart CDN selection with fallback
+    // - For local development/preview: use local fixed build
+    // - For production (GitHub Pages): use CDN with fallback
+    const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    
+    if (isLocalhost) {
+      // Use local build for development/preview
+      omborScript.src = '/ombor.umd.js'  // Served from docs/public/
+      addLog('info', '🔧 Ishlab chiqish rejimi: Mahalliy Ombor versiyasi')
+    } else {
+      // Use CDN for production (v0.0.7 has the process.env fix)
+      omborScript.src = 'https://cdn.jsdelivr.net/npm/ombor@latest/dist/ombor.umd.js'
+      addLog('info', '🌐 Ishlab chiqarish rejimi: CDN Ombor versiyasi')
+    }
 
     omborScript.onload = () => {
       // Handle named export (Ombor.Ombor pattern for UMD)
